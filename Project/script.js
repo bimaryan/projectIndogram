@@ -13,14 +13,14 @@ function Register() {
   localStorage.setItem("password", passwordRegister.value);
 }
 function Login() {
-  if (usernameInput.value == "admin" && passwordInput.value == "admin123") {
+  if (usernameInput.value == "admin" && passwordInput.value == "123") {
     alert('Login Sebagai Admin');
-    window.location.href = "akun.html"
+    window.location.href = "home.html"
   }
   else if (usernameInput.value == localStorage.getItem("username") && passwordInput.value == localStorage.getItem("password")) {
-    window.location.href = "akun.html";
+    window.location.href = "home.html";
   }
   else {
-    alert('your username/password are wrong');
+    alert('username/password mu belom dimasukkin blok');
   }
 }
