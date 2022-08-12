@@ -25,4 +25,4 @@ app.post("/register", async (req, res) => {
 
 app.get("/getUser", (req, res) => {});
 
-app.listen(5050, () => console.log("server listened..."));
+app.listen(5050, () => console.log("dffd listened..."));
