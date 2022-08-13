@@ -1,0 +1,14 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.form-control {
+  display: flex;
+  width: 300px;
+  justify-content: center;
+}
+
+.tombol {
+  width: 300px;
+}
