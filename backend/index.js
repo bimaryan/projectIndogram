@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 const sequelize = require("./config/Database");
 const cors = require("cors");
-const User = require("./config/model/User.js");
+const route = require("./routes/routes");
+const jwt = require("jsonwebtoken");
+const verifyToken = require("./middleware/verifyToken");
 
 app.use(cors());
 app.use(express.json({ type: "application/json" }));
+app.use(route);
 
 // Check if database connected
 (async () => {
@@ -17,12 +20,8 @@ app.use(express.json({ type: "application/json" }));
   }
 })();
 
-app.post("/register", async (req, res) => {
-  //   const { username, pass, confPass } = req.body;
-  await User.create(req.body);
-  console.log(User);
+app.get("/getUser", verifyToken, (req, res) => {
+  console.log(req.body);
 });
 
-app.get("/getUser", (req, res) => {});
-
-app.listen(5050, () => console.log("dffd listened..."));
+app.listen(5050, () => console.log("server listened..."));
