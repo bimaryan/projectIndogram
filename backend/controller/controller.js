@@ -98,4 +98,15 @@ const logout = async (req, res) => {
   res.status(200).json({ msg: "Succesfull logout!" });
 };
 
-module.exports = { register, login, getUser, refreshToken, logout };
+const getAllUsers = async (req, res) => {
+  const user = await User.findAll({
+    where: {
+      username: req.body.username,
+    },
+  });
+  if (!user.length) res.status(400).json({ msg: "User not found" });
+  const users = await User.findAll();
+  res.status(200).json(users);
+};
+
+module.exports = { register, login, getUser, refreshToken, logout, getAllUsers };

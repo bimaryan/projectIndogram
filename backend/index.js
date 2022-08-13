@@ -24,15 +24,4 @@ app.use(route);
   }
 })();
 
-app.get("/getAllUser", verifyToken, async (req, res) => {
-  const user = await User.findAll({
-    where: {
-      username: req.body.username,
-    },
-  });
-  if (!user.length) res.status(400).json({ msg: "User not found" });
-  const users = await User.findAll();
-  res.status(200).json(users);
-});
-
 app.listen(5050, () => console.log("server listened..."));
