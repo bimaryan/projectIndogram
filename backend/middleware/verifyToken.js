@@ -5,7 +5,7 @@ const tokenVerify = async (req, res, next) => {
   if (token == null) res.sendStatus(401);
   try {
     let decoded = jwt.verify(token, process.env.ACCESS_TOKEN);
-    console.log(decoded);
+    // console.log(decoded);
     req.body.username = decoded.username;
   } catch (err) {
     // err

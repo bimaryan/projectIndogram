@@ -4,10 +4,12 @@ const sequelize = require("./config/Database");
 const cors = require("cors");
 const route = require("./routes/routes");
 const jwt = require("jsonwebtoken");
-const verifyToken = require("./middleware/verifyToken");
 const User = require("./config/model/User");
+const dotenv = require("dotenv").config();
+const cookieParser = require("cookie-parser");
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json({ type: "application/json" }));
 app.use(route);
 
@@ -21,18 +23,26 @@ app.use(route);
   }
 })();
 
-app.get("/getUser", verifyToken, async (req, res) => {
-  try {
-    const user = await User.findOne({
-      where: {
-        username: req.body.username,
-      },
-    });
+app.delete("/logout", async (req, res) => {
+  const refresh_token = req.cookies.refreshToken;
+  if (!refresh_token) res.sendStatus(204);
+  const user = await User.findAll({
+    where: {
+      refresh_token,
+    },
+  });
+  if (!user[0]) res.status(400).json({ msg: "Logout failed" });
 
-    res.status(200).json({ msg: user });
-  } catch (err) {
-    res.status(400).json({ msg: "Unknown error" });
-  }
+  await User.update(
+    { refresh_token: null },
+    {
+      where: {
+        id: user[0].id,
+      },
+    }
+  );
+
+  res.status(200).json({ msg: "Succesfull logout!" });
 });
 
 app.listen(5050, () => console.log("server listened..."));
