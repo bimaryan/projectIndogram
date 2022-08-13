@@ -6,6 +6,7 @@ const route = require("./routes/routes");
 const jwt = require("jsonwebtoken");
 const User = require("./config/model/User");
 const dotenv = require("dotenv").config();
+const verifyToken = require("./middleware/verifyToken");
 const cookieParser = require("cookie-parser");
 
 app.use(cors());
@@ -23,26 +24,15 @@ app.use(route);
   }
 })();
 
-app.delete("/logout", async (req, res) => {
-  const refresh_token = req.cookies.refreshToken;
-  if (!refresh_token) res.sendStatus(204);
+app.get("/getAllUser", verifyToken, async (req, res) => {
   const user = await User.findAll({
     where: {
-      refresh_token,
+      username: req.body.username,
     },
   });
-  if (!user[0]) res.status(400).json({ msg: "Logout failed" });
-
-  await User.update(
-    { refresh_token: null },
-    {
-      where: {
-        id: user[0].id,
-      },
-    }
-  );
-
-  res.status(200).json({ msg: "Succesfull logout!" });
+  if (!user.length) res.status(400).json({ msg: "User not found" });
+  const users = await User.findAll();
+  res.status(200).json(users);
 });
 
 app.listen(5050, () => console.log("server listened..."));
