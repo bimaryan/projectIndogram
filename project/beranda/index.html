@@ -21,12 +21,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-house"></i> Beranda</a>
+          <a class="nav-link active" aria-current="page" href="/beranda"><i class="fa-solid fa-house"></i> Beranda</a>
           <a class="nav-link" href="#"><i class="fa-solid fa-comments"></i> Chat</a>
           <a class="nav-link" href="#"><i class="fa-solid fa-bell"></i> Notification</a>
-          <a href="/dashboard" class="nav-link"><i class="fa-solid fa-user"></i> Dashboard</a>
-          <a href="https://indogram.bimaryan.repl.co/index.html" class="nav-link" onclick="Logout()"
-            id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown">Dashboard</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/dashboard" class="nav-link dropdown-item"><i class="fa-solid fa-user m-2"></i> Account</a>
+                <a href="/dashboard/setting-profile" class="nav-link dropdown-item"><i
+                    class="fa-regular fa-id-card m-2"></i> Setting Profile</a>
+                <a href="https://indogram.bimaryan.repl.co/index.html" class="nav-link dropdown-item" onclick="Logout()"
+                  id="logoutButton"><i class="fa-solid fa-right-from-bracket m-2"></i> Log out</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -37,8 +46,8 @@
     <div class="card">
       <div class="card-header">
         <div class="d-flex">
-          <span><img src="https://Yucub.bimaryan.repl.co/img/pp adhis.jpg" class="rounded-circle" alt height="45"
-              width="45" /> Adhis</span>
+          <span id="username"><img src="https://Yucub.bimaryan.repl.co/img/pp adhis.jpg" class="rounded-circle" alt
+              height="45" width="45" id="" /> Adhis</span>
         </div>
       </div>
       <img src="https://indogram.bimaryan.repl.co/img/hinata.png" />
@@ -51,7 +60,10 @@
         </div>
         <div class="mt-2"><strong>1000 likes</strong>
           <br>
-          <span><strong>Adhis</strong> siapa yang suka sama hinata coba komen</span>
+          <span id="username" class="fw-bold">
+            Adhis
+            <p class="text-muted" id="caption">...</p>
+          </span>
         </div>
         <hr>
         <form class="d-flex" role="search">
@@ -76,7 +88,10 @@
         </div>
         <div class="mt-2"><strong>2000 likes</strong>
           <br>
-          <span><strong>Bima Gamsteng</strong> ...</span>
+          <span id="username" class="fw-bold">
+            Bima Gamsteng
+            <p class="text-muted" id="caption">...</p>
+          </span>
         </div>
         <hr>
         <form class="d-flex" role="search">
