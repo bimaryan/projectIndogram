@@ -22,3 +22,9 @@ html, body {
 .push {
   width: 320px;
 }
+
+.label {
+  border-radius: 10px;
+  border: 5px;
+  width: 150px;
+}
